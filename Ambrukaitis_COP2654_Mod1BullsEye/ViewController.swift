@@ -22,10 +22,20 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showAlert() {
-        let message = "The value of the slider is: \(sliderCurrentValue)" +
-                      "\nThe target value was: \(targetValue)"
-                    
+        var difference: Int
         
+        if sliderCurrentValue > targetValue{
+            difference = sliderCurrentValue - targetValue
+        } else if sliderCurrentValue < targetValue {
+            difference = targetValue - sliderCurrentValue
+        } else {
+            difference = 0
+        }
+        
+        let message = "The value of the slider is: \(sliderCurrentValue)" +
+                      "\nThe target value was: \(targetValue)" +
+                      "\nThe difference is: \(difference)"
+                    
         let alert = UIAlertController(
             title: "Hello, World!",
             message: message,
@@ -51,13 +61,14 @@ class ViewController: UIViewController {
     func startNewRound() {
         targetValue = Int.random(in: 1...100)
         sliderCurrentValue = 50
-        slider.value = Float(sliderCurrentValue) //resets the slider to 50
+        slider.value = Float(sliderCurrentValue) //resets the slider position to 50
         updateLabels()
     }
     
     func updateLabels() {
-        targetLabel.text = String(targetValue)
+        targetLabel.text = String(targetValue) //sets the target label to the new random target
     }
+    
     
 }
 
