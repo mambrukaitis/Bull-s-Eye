@@ -6,24 +6,24 @@
 //
 
 import UIKit
+import WebKit
 
 class AboutViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    @IBOutlet var webView: WKWebView!
+    
+    //button to return the user to the main game, the transition is animated
+    @IBAction func returnToGame() {
+        dismiss(animated: true, completion: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //loads the HTML file into the WebKit view
+        if let url = Bundle.main.url(
+            forResource: "BullsEye", withExtension: "html") {
+            let request = URLRequest(url: url)
+            webView.load(request)
+        }
     }
-    */
-
 }
